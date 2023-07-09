@@ -1,0 +1,71 @@
+QUERY TUNING
+
+Query is running slow or query tuning:
+1. Check any open Tran are there by using
+DBCC OPENTRAN
+2. Check for any blockings are there?
+If yes then according to your project process we find blockings and speak to apps team to 
+confirm which SPID required to kill with approvals via email.
+KILL SPID
+If no blockings then?
+3. Check for any deadlocks
+Note: By default SQL Server db engine will not capture any deadlock information DBA team 
+need to enable trace flags.
+DBCC Traceon (1222 or 1204, -1)
+4. Check for any query execution plan or cost based plan.
+Execution plan display:
+1. Physical operation (Scan type)
+2. Logical Operation
+3. Estimated I\O COST
+4. Estimated CPU COST
+5. Estimated number of executions
+6. Estimated number of rows.
+7. Cache Size
+
+8. Rebinds
+9. Rewinds
+10. Operator cost
+Execution plan definitions:
+Actual Execution Plan - (CTRL + M) - is created after execution of the query and contains the 
+steps that were performed
+Estimated Execution Plan - (CTRL + L) - is created without executing the query and contains an 
+approximate execution plan
+> Rebind: Provides number of join operations
+> Rewind: Provides number of join operations has changed since.
+5. Check whether any lock types are in the tables
+SP_LOCK or select * from Sys.dm_tran_locks [DMV]
+6. Check whether any indexes are created on the table at or not. If no then inform your 
+dev\apps team to suggest create index which improves performance of query.
+7. Check for FRAGMENTATION LEVEL on the tables.
+Select * from sys.dm_db_index_physical_stats (DB_ID (‘DB NAME’), Object_id (‘tablename’), 
+NULL, NULL, ‘Detailed’) -----(From SQL Server 2005)
+or DBCC SHOWCONTIG (Upto 2000 version of SQL Server)
+If We FRAGMENTATION level 
+1. <5: No action and indexes are good.
+2. If >5 and <30: Index need to reorganize
+Alter index indexname on table name reorganize
+3. If >30: Index need to rebuild
+Alter index indexname on table name Rebuild
+
+If no FRAGMENTATION 
+8. Check for any missing indexes by using
+Select * from sys.dm_db_missing_index_details
+9. Check for any unused indexes in a table
+Select * from sys.db_unused_index_details
+10. Check CPU and memory utilisation.get Top 10 queries which are consuming more CPU and 
+memory in the Sql then inform share the details to apps team.
+11. Run profiler or perfmon tool to capture events or counters depending on type of 
+parameters.
+12. Check any disk or I\O or Network related issues.
+13. Run the DTA [Database tuning advisor] to get any suggestions to improve the performance
+From query side: 
+1. Check the query (select) contains no_lock functionality or not.
+2. Check whether any complicated loops or joins or triggers used or not.
+Note: How to find which SQL Server instance is consuming more CPU or memory when multiple 
+instances in a single server.
+Go to task manager> view > select columns > Select PID [Process id]. Take PID for SQL Server 
+and compare with configuration manager> Process id for specific instance. Compare both PID 
+for task manager and configuration manager > Then conclude the instance name which takes 
+more memory or CPU…..
+How to find SPID level inside the instance?
+Use SP_WHO2 or SP_WHO3

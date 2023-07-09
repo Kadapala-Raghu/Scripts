@@ -1,0 +1,42 @@
+----------CPU--------------------------
+1.select * from sys.dm_os_schedulers
+2.select * from sys.dm_os_ring_buffers
+3.select * from sys.dm_os_workers
+
+------------MEMORY-------------------
+1.select * from sys.dm_os_memory_clerks
+2.select * from sys.dm_process_memory
+3.select * from sys.dm_os_memory_nodes
+4.select * from sys.dm_os_buffer_descriptors
+5.select * from sys.dm_os_memory_objects
+
+----------I/O INPUT--------------------
+1.SELECT * FROM SYS.DM_IO_VIRTUAL_FILE_STATS(NULL,NULL)
+
+------------TEMPDB TROUBLE SHHOTING------------------
+1.SELECT * FROM SYS.DM_DB_FILE_SPACE_USAGE
+2.SELECT * FROM SYS.DM_DB_TASK_SPACE_USAGE
+
+-------------INDEX------------------------
+1.SELECT * FROM SYS.DM_DB_INDEX_SPHYSICAL_STATS
+2. SELECT * FROM SYS.DM_DB_MISSING_INDEX_GROUP_STATS
+3.SELECT * FROM SYS.DM_DB_MISSING_INDEX_DETAILS
+4. SELECT * FROM SYS.DM_DB_INDEX_USAGE_STATS(UN USED INDEX DETAILS)
+
+---------UPDATE STATS DETAILS------------------------
+1.SELECT * FROM SYS.DM_DB_STATS_PROPERTIES
+
+-------QUERY DETAILS--------------------
+
+1. SELECT * FROM SYS.DM_EXEC_QUERY_STAS(TOP EXPENSIVE QUERIES)(EXECUTION TIME TOTAL WORKER TIME CPU)
+
+2.SELECT * FROM SYS.DM_EXEC_SQL_TEXT
+3.SELECT * FROM SYS.DM_EXEC_QUERY_PLAN(PLAN FOR THAT QURY DETAILS GET)
+4.SELECT * FROM SYS.DM_EXEC_CACHED_PLANS
+5.SELECT * FROM SYS.DM_OS_PERFORMANCE_COUNTERS
+6. SELECT * FROM SYS.DM_EXEC_SESSIONS
+
+--------------------WAITS DETAILS----------------------
+
+1. SELECT * FROM SYS.DM_OS_WAIT_STATS
+2. SELECT * FROM SYS.DM_OS_WAITING_TASKS(SESSION LEVEL WAIT DETAILS WHERE SESSION ID=)

@@ -1,0 +1,67 @@
+JOB STATUS::
+
+Use msdb
+go
+ 
+select distinct j.Name as "Job Name", h.run_date as LastStatusDate, 
+case h.run_status 
+when 0 then 'Failed' 
+when 1 then 'Successful' 
+when 3 then 'Cancelled' 
+
+when 4 then 'Executing' 
+
+end as JobStatus
+from sysJobHistory h, sysJobs j
+where j.job_id = h.job_id and h.run_date = 
+(select max(hi.run_date) from sysJobHistory hi where h.job_id = hi.job_id)
+order by 1
+
+========================
+DATABASE STATUS::
+
+select name, state_desc  from sys.databases
+
+===========================
+
+BACKUP STATUS::
+
+SELECT SUBSTRING(s.name,1,50) AS 'DATABASE Name',
+b.backup_start_date AS 'Full DB Backup Status'
+
+FROM master..sysdatabases s
+LEFT OUTER JOIN msdb..backupset b
+ON s.name = b.database_name
+AND b.backup_start_date =
+(SELECT MAX(backup_start_date)
+FROM msdb..backupset
+WHERE database_name = b.database_name
+AND type = 'D') -- full database backups only, not log backups
+LEFT OUTER JOIN msdb..backupset c
+ON s.name = c.database_name
+AND c.backup_start_date =
+(SELECT MAX(backup_start_date)
+FROM msdb..backupset
+WHERE database_name = c.database_name
+AND type = 'I')
+LEFT OUTER JOIN msdb..backupset d
+ON s.name = d.database_name
+AND d.backup_start_date =
+(SELECT MAX(backup_start_date)
+FROM msdb..backupset
+WHERE database_name = d.database_name
+AND type = 'L')
+WHERE s.name <> 'tempdb'
+ORDER BY s.name
+
+========================
+DISK STATUS::
+
+SELECT DISTINCT vs.volume_mount_point,
+
+CONVERT( decimal( 18 , 2 ) , vs.total_bytes / 1073741824.0 ) AS [Total Size (GB)],
+CONVERT( decimal( 18 , 2 ) , vs.available_bytes / 1073741824.0 )AS [Available Size (GB)],
+CAST( CAST( vs.available_bytes AS float ) / CAST( vs.total_bytes AS float )AS decimal( 18 , 2 )) * 100 AS [Space Free %]
+FROM sys.master_files AS f WITH ( NOLOCK )
+CROSS APPLY sys.dm_os_volume_stats( f.database_id , f.[file_id] ) AS vs
+OPTION( RECOMPILE );  

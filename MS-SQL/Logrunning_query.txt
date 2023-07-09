@@ -1,0 +1,27 @@
+use 
+master
+
+SELECT r.session_id,
+       st.TEXT AS batch_text,
+       qp.query_plan AS 'XML Plan',
+       r.start_time,
+       r.status,
+       r.total_elapsed_time
+FROM sys.dm_exec_requests AS r
+     CROSS APPLY sys.dm_exec_sql_text(r.sql_handle) AS st
+     CROSS APPLY sys.dm_exec_query_plan(r.plan_handle) AS qp
+WHERE DB_NAME(r.database_id) = '{db_name}'
+ORDER BY cpu_time DESC;
+
+or 
+
+SELECT r.session_id, r.wait_type, r.wait_time AS wait_time_ms
+FROM sys.dm_exec_requests r 
+   JOIN sys.dm_exec_sessions s ON r.session_id = s.session_id 
+WHERE wait_time > 500
+AND is_user_process = 1
+
+
+
+
+----dbcc inputbuffer(54)
