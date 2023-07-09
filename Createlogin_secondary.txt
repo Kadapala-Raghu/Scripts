@@ -1,0 +1,14 @@
+sid change of different logins:
+----------------------------------
+
+CREATE LOGIN [primaryservr login]
+
+WITH PASSWORD='primaryserver password,
+
+SID=primary server sid;
+
+
+
+----create login [login name] with password='Greatwolf@!23', sid=0xC638E09F2C718F43A140DA1002904208;
+
+----execute in secondary server

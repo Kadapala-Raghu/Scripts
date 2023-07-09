@@ -1,0 +1,128 @@
+Daily Responsibilities:
+1) Check the Shift Handover.
+2) Check for any task continuity support needed.
+3) Verify the Ticket Queue
+4) Check the mails
+5) Perform Health Checks (Critical Servers)
+6) Perform any Change Requests during your shift (if any scheduled).
+7) In an Offshore-Onsite model, attending Status Calls.
+Health Checks:
+1) Instance running or not
+2) Agent running or not
+3) Reading Error/Agent Logs
+4) Checking Backups
+5) Checking disk space
+6) HA Synchronization/failure checks
+7) Event Viewer
+8) SQL Server settings
+9) Database settings
+10) High availability checks (failing (or) not)
+11) SQL Server Error logs
+12) Storage
+q 
+394
+These are the task list that must be done by a DBA on daily basis.
+1) Check System Event Logs and SQL Server Error Logs for unusual events.
+2) Verify that all scheduled jobs have run successfully.
+3) Confirm that backups have been made successfully and moved to the backup storage or 
+secure location.
+4) Monitor disk space to make sure SQL Servers will not run out of disk space.
+5) Periodically monitor performance of database and system using both System Monitor and 
+SQL Server Profiler.
+6) Monitor and identify blocking issues.
+7) Keep a log of any changes you make to servers, instance setting, database setting and 
+monitoring script.
+8) Create SQL Server alerts to notify you of problems, and e-mailed to you. Take action as 
+needed.
+9) Regularly restore backups to a test server in order to verify that you can restore them.
+Monthly Check list?
+1. Make a list of all SA passwords for each server it in secure place.
+2. Make a list of all the passwords for each login crated on the production boxes.
+3. We save the SQL Servers and Windows configuration information in secure place. This 
+information is needed to rebuild an NT& SQL Server box in case of a disaster
+4. Perform a test restore of a database backup. This is done in order to prepare for 
+unforeseen situations.
+5. We save information about any changes made to a server – hardware or software.
+6. Maintain system logs in a secure fashion. Keep records of all service packs installed for 
+both Microsoft Windows NT Server and Microsoft SQL Server. Keep records of network 
+libraries used, the security mode, SA passwords and service accounts.
+7. Valid that no error messages are generated during the restore process.
+8. Set the MSSQL and SQL Server Agent services to Auto-Start when the server starts.
+
+DBA Maintains Activities:
+Daily Maintaince: Differential backup, Transaction log backup, Blocking jobs, CPU Utilization
+History cleanup job
+
+Weekly Maintaince: Full backup, Rebuild indexes, Reorganize index, DBCC Checkdb, Purging 
+jobs, 
+Monthly Maintaince: Patch management, Backup file testing 
+
+Yearly Maintaince: DR Testing, BCP plan
+
+Change Management:
+Change Management Tool 
+BMC Remedy
+CPMS: Change Process Management Service
+➢ Change Management is introducing modifications to an existing environment 
+➢ It’s a planned activity 
+➢ Its having 3 stages
+❖ Normal Changes (CR)::: Ex: File movement, adding file, changing memory 
+parameters, High availability configurations…
+❖ Standard Changes (S-CR) ::: Patch management, DR Testing
+❖ Emergency Changes (E-CR) ::: disk full ,100% cpu utilization, log file full, 
+Database\Sql service down, Master database down
+Change Management Process:
+1. Get all the requirements including down time details from apps team
+2. Raise a change as per the plan
+3. Once change raise, pull all technical steps including pre-installation, implementation, 
+and verification and backout plan.
+4. Once completed, get technical side approval
+5. Once approved, get SDM Approval.[Delivery manager approval\client approval]
+6. After implement the change as per implementation date and finish as per the time lines.
+7. Once implement success then Change is success else failed.
+Change States:
+Raise Change> Impact assessment> File the technical steps> Pass for technical approval> Pass 
+to SDM approval> Once Approved,
+Problem Management:
+Repetitive or Recurring issues we can fix by using “Problem Management”
+➢ Problem Management handles recurring incidents. Problem Management Naming 
+convention is ‘PRB’
+➢ Identify the causes, resolve if it is from root
+➢ Generally Sr.L3/L4 will be doing problem management
+➢ For every Problem once it is resolved requires a RCA (Root cause analysis )
+Note: PB tickets handled by Pb management coordinators by setting up the call, getting 
+updates from all team. On time all members should provide the correct updates.
+Capacity planning\management:
+➢ Forecasting the growth of database is called Capacity planning.
+➢ It is nothing but a Disk planning
+➢ Volume reporting is giving 1 month is estimation report and it is given to 1 year to 
+allocated the disk space
+Server\Database Hardening rules: Harding is to protect the server from threats
+Harding is to protect the server from threats
+Rules:
+1. Remove un necessary roles to the users\logins
+2. Provide strong sa password 
+3. Disable built-in administrator account
+4. Remove unnecessary users\logins
+5. Always create instead of individual logins create groups
+BCP (Business continuity Plan) Plan:
+➢ BCP is to defines and perform the day-to-day operations at multiple locations.
+➢ If one server is down then another server is do the process
+➢ Every year once one resource move to another location and work from there, and end 
+of the same day has to provide a clear BCP team and again this is ITIL process.
+RCA (Root Cause Analysis) Plan:
+➢ This is related to Problem management
+➢ In root cause analysis 
+❖ Issue/problem
+❖ Solution
+❖ Measurement
+❖ Mitigate not to happen again the same issue in server.
+
+RACI Matrix: Defines Roles and responsibilities from each team which relate to each team.
+
+❖ R- Responsibility
+❖ A-Accountable
+❖ C-Consult
+❖ I-Inform
+➢ RACI is a simple Excel sheet
+

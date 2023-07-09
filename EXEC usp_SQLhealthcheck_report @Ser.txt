@@ -1,0 +1,1 @@
+EXEC usp_SQLhealthcheck_report @Server='local'

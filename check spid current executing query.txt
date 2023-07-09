@@ -1,0 +1,7 @@
+dbcc inputbuffer(spid)
+
+--To check open active transaction
+dbcc opentran
+
+--To check activity progress like backup/restore/shrink operations
+select percent_complete,* from sys.dm_exec_requests where session_id >50

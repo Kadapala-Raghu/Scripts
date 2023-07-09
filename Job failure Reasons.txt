@@ -1,0 +1,10 @@
+Job failure Reasons:
+Permission issues --- MSDB read\write
+Network failure for the backup
+Job disabled
+Agent stopped
+Database not in online
+SQL Services are stopped
+T-SQL issue
+Disk space issues
+Job owner disabled

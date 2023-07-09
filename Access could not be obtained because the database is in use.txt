@@ -1,0 +1,7 @@
+solution:
+
+put database offline 
+
+ALTER DATABASE [Test] SET OFFLINE WITH ROLLBACK IMMEDIATE
+
+after restore again.

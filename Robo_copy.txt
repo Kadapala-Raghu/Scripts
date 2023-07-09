@@ -1,0 +1,22 @@
+robocopy:
+
+V_One_3232023
+VeeamOne_3232023
+
+F:\Backups_full
+GWR-VBRP01-PM
+-----------------------------------
+
+GWR-VBRC01-VM
+F:\VBRP01_BACKUPS
+
+\\Gwr-vbrc01-vm\vbrp01_backups
+
+robocopy F:\Backups_full "\\Gwr-vbrc01-vm\vbrp01_backups" VeeamOne_3232023*
+
+
+
+run into source server cmd prampt.  
+
+\\Gwr-vbrc01-vm\vbrp01_backups(destination server folder shared path)
+F:\Backups_full (source server folder)

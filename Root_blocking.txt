@@ -1,0 +1,2 @@
+Select blocked as 'root blocking' from sys.sysprocesses
+where blocked <>0 except select spid from sys.sysprocesses where blocked <> 0
